@@ -1,10 +1,3 @@
-/* =========================================================
-   I love u sm — script.js
-   ========================================================= */
-
-/* ---------------------------------------------------------
-   Пиксельный шаблон сердечка
-   --------------------------------------------------------- */
 const HEART_PATTERN = [
   [0, 1, 1, 0, 1, 1, 0],
   [1, 1, 1, 1, 1, 1, 1],
@@ -46,9 +39,6 @@ function makePixelHeartSVG(color) {
             xmlns="http://www.w3.org/2000/svg">${rects}</svg>`;
 }
 
-/* ---------------------------------------------------------
-   Фон: падающие пиксельные сердечки
-   --------------------------------------------------------- */
 (function initBgHearts() {
   const canvas = document.getElementById('bgHearts');
   if (!canvas) return;
@@ -122,9 +112,6 @@ function makePixelHeartSVG(color) {
   requestAnimationFrame(frame);
 })();
 
-/* ---------------------------------------------------------
-   Сердце из слов — эффект "обрисовки контура"
-   --------------------------------------------------------- */
 const HeartWords = (function () {
   const canvas = document.getElementById('heartCanvas');
   if (!canvas) return { start() {}, resize() {} };
@@ -133,15 +120,6 @@ const HeartWords = (function () {
 
   const TEXTS = ['i love u', 'Yas'];
   const COLORS = ['#ff5fa2', '#ff86bf', '#c084fc', '#ff9ac9'];
-
-  /* ---------- НАСТРОЙКИ СКОРОСТИ ----------
-     revealDur  — за сколько секунд слова полностью обрисуют контур.
-                  Меньше → быстрее. (главный параметр)
-     wordFade   — плавность появления одного слова.
-     hold       — сколько держится готовое сердечко.
-     fadeOut    — общее исчезновение перед новым циклом.
-     gap        — пауза между циклами.
-     shiftPerCycle — сдвиг стартовой точки между циклами. */
   const CFG = {
     revealDur:     1.6,
     wordFade:      0.22,
@@ -163,7 +141,6 @@ const HeartWords = (function () {
 
   let offset = 0;
 
-  // тайминги цикла
   let cycleTime = 0;
   let cycleDur = 1;
   let wordStep = 0;
@@ -174,7 +151,6 @@ const HeartWords = (function () {
   let running = false;
   let last = performance.now();
 
-  /* --- математика сердечка --- */
   function heartPoint(t) {
     const x = 16 * Math.pow(Math.sin(t), 3);
     const y =
@@ -328,7 +304,6 @@ const HeartWords = (function () {
 
     ctx.clearRect(0, 0, W, H);
 
-    // пунктирный контур-подсказка (куда рисуем)
     if (outline) {
       ctx.save();
       ctx.lineWidth = 2;
@@ -338,7 +313,6 @@ const HeartWords = (function () {
       ctx.restore();
     }
 
-    // растущий яркий "след пера", синхронный со словами
     let trailLen = 0;
     let trailAlpha = 0;
 
@@ -365,7 +339,6 @@ const HeartWords = (function () {
       ctx.restore();
     }
 
-    // сами слова
     ctx.font = `${fontSize}px "Press Start 2P", monospace`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -416,15 +389,10 @@ const HeartWords = (function () {
   return { start, resize };
 })();
 
-/* ---------------------------------------------------------
-   Логика сайта
-   --------------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
-  // пиксельное сердечко в заголовке
   const titleHeart = document.getElementById('titleHeart');
   if (titleHeart) titleHeart.innerHTML = makePixelHeartSVG('#ff5fa2');
 
-  // если баннера нет — просто останется розовая рамка
   const bannerImg = document.getElementById('bannerImg');
   if (bannerImg) {
     bannerImg.addEventListener('error', () => { bannerImg.style.display = 'none'; });
