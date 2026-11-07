@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>I love u sm ♥</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="locked">
+
+  <canvas id="bgHearts"></canvas>
+
+  <div id="intro">
+    <div class="tap-wrap">
+      <button id="tapBtn" class="pixel-btn" type="button">Tap!</button>
+    </div>
+    <p class="intro-hint">i love u sm</p>
+  </div>
+
+  <main id="content" class="is-hidden">
+
+    <h1 class="pixel-title">
+      <span>I love u sm</span>
+      <span class="pixel-heart" id="titleHeart"></span>
+    </h1>
+
+    <div class="banner">
+      <img src="assets/banner.jpg" alt="banner" class="banner-img" id="bannerImg" />
+    </div>
+
+    <section class="heart-stage">
+      <canvas id="heartCanvas"></canvas>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
