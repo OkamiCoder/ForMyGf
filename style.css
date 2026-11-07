@@ -1,0 +1,241 @@
+/* =========================================================
+   I love u sm — style.css
+   ========================================================= */
+
+:root {
+  --pink-100: #ffd6e8;
+  --pink-200: #ffb6d5;
+  --pink-300: #ff8fc4;
+  --pink-400: #ff5fa2;
+  --pink-500: #e066a3;
+  --pink-700: #b23c78;
+  --pink-900: #7a2c55;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Press Start 2P', ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--pink-900);
+  background-color: #fff2f8;
+  background-image:
+    radial-gradient(1200px 800px at 15% 10%, #fffafd 0%, rgba(255,250,253,0) 60%),
+    radial-gradient(900px 700px at 85% 90%, #ffe0f0 0%, rgba(255,224,240,0) 60%),
+    linear-gradient(160deg, #fff2f8 0%, #ffe6f2 45%, #ffd9ec 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+body.locked { overflow: hidden; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #ffe9f3; }
+::-webkit-scrollbar-thumb {
+  background: var(--pink-200);
+  border: 2px solid #ffe9f3;
+}
+
+/* ---------- фон: падающие сердечки ---------- */
+#bgHearts {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  image-rendering: pixelated;
+}
+
+/* =========================================================
+   ЭКРАН 1
+   ========================================================= */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.6rem;
+  padding: 1.5rem;
+  transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s;
+}
+
+#intro.intro-out {
+  opacity: 0;
+  transform: scale(1.2);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tap-wrap { animation: bob 2s steps(5, end) infinite alternate; }
+
+@keyframes bob {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-10px); }
+}
+
+.pixel-btn {
+  font-family: inherit;
+  font-size: clamp(0.95rem, 4.5vw, 1.45rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 2px 2px 0 var(--pink-500);
+  background: var(--pink-300);
+  border: 4px solid var(--pink-700);
+  padding: 1.45rem 2.7rem;
+  cursor: pointer;
+  border-radius: 0;
+  image-rendering: pixelated;
+  box-shadow:
+    inset  4px  4px 0 0 #ffc7e4,
+    inset -4px -4px 0 0 var(--pink-500),
+    0 8px 0 0 var(--pink-700);
+  transition:
+    transform 0.08s steps(2),
+    box-shadow 0.08s steps(2),
+    background 0.15s ease;
+}
+
+.pixel-btn:hover { background: #ff9ecf; }
+
+.pixel-btn:active {
+  transform: translateY(6px);
+  box-shadow:
+    inset  4px  4px 0 0 #ffc7e4,
+    inset -4px -4px 0 0 var(--pink-500),
+    0 2px 0 0 var(--pink-700);
+}
+
+.pixel-btn:focus-visible {
+  outline: 4px solid var(--pink-400);
+  outline-offset: 6px;
+}
+
+.intro-hint {
+  margin: 0;
+  font-size: 0.55rem;
+  line-height: 2;
+  letter-spacing: 0.08em;
+  color: #d97fb0;
+  text-align: center;
+  animation: hint-blink 1.8s steps(2, end) infinite;
+}
+
+@keyframes hint-blink {
+  0%, 62%   { opacity: 1; }
+  63%, 100% { opacity: 0.3; }
+}
+
+/* =========================================================
+   ЭКРАН 2
+   ========================================================= */
+#content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 4rem 1.25rem 6rem;
+}
+
+#content.is-hidden { display: none; }
+
+#content.content-in {
+  animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- заголовок ---------- */
+.pixel-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8em;
+  width: 100%;
+  margin: 0;
+  font-size: clamp(1rem, 5vw, 2rem);
+  line-height: 1.6;
+  text-align: center;
+  color: var(--pink-400);
+  text-shadow:
+    3px 3px 0 var(--pink-100),
+    6px 6px 0 rgba(255, 182, 213, 0.6);
+}
+
+.pixel-heart {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  line-height: 0;
+  filter: drop-shadow(3px 3px 0 rgba(255, 182, 213, 0.9));
+  animation: heartbeat 1.8s steps(4, end) infinite;
+}
+
+.pixel-heart svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15%      { transform: scale(1.22); }
+  30%      { transform: scale(0.98); }
+  45%      { transform: scale(1.12); }
+  60%      { transform: scale(1); }
+}
+
+/* ---------- баннер ---------- */
+.banner {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 3.2rem auto 0;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #fff6fb 0%, #ffe3f0 100%);
+  border: 4px solid var(--pink-200);
+  box-shadow: 8px 8px 0 0 rgba(255, 182, 213, 0.55);
+  overflow: hidden;
+}
+
+.banner-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+/* ---------- сердце из слов ---------- */
+.heart-stage {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 3.5rem auto 0;
+  aspect-ratio: 1 / 1;
+}
+
+#heartCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+@media (max-width: 480px) {
+  #content { padding: 3rem 1rem 4rem; }
+  .intro-hint { font-size: 0.5rem; }
+}
